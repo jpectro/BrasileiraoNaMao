@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
+import 'escudo.dart';
 
 class LinhaTabela extends StatelessWidget {
   final String posicao;
@@ -52,7 +53,15 @@ class LinhaTabela extends StatelessWidget {
             color: corZona ?? Colors.transparent,
           ),
           coluna(posicao),
-          Expanded(child: Text(nome, style: estilo)),
+          // no cabeçalho só reserva o espaço do escudo
+          if (cabecalho)
+            const SizedBox(width: 30)
+          else
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: Escudo(time: nome, tamanho: 22),
+            ),
+          Expanded(child: Text(nome, style: estilo, overflow: TextOverflow.ellipsis)),
           coluna(pontos, negrito: true),
           coluna(jogos),
           coluna(vitorias),

@@ -12,4 +12,5 @@ class AppColors {
   static const textoApagado = Colors.white54;
   static const divisor = Colors.white24;
   static const perigo = Colors.redAccent;
+  static const cartaoAmarelo = Color(0xFFFFD600);
 }

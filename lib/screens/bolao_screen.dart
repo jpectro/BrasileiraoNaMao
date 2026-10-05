@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../data/mock_data.dart';
 import '../models/palpite.dart';
 import '../theme/app_colors.dart';
+import '../widgets/escudo.dart';
 import '../widgets/seletor_gols.dart';
 import '../widgets/titulo_secao.dart';
 
@@ -78,10 +79,16 @@ class _BolaoScreenState extends State<BolaoScreen> {
             Row(
               children: [
                 Expanded(
-                  child: Text(
-                    palpite.timeCasa,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  child: Column(
+                    children: [
+                      Escudo(time: palpite.timeCasa, tamanho: 28),
+                      const SizedBox(height: 6),
+                      Text(
+                        palpite.timeCasa,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
                 ),
                 SeletorGols(
@@ -97,10 +104,16 @@ class _BolaoScreenState extends State<BolaoScreen> {
                   onChanged: (v) => setState(() => palpite.golsFora = v),
                 ),
                 Expanded(
-                  child: Text(
-                    palpite.timeFora,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  child: Column(
+                    children: [
+                      Escudo(time: palpite.timeFora, tamanho: 28),
+                      const SizedBox(height: 6),
+                      Text(
+                        palpite.timeFora,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
                 ),
               ],

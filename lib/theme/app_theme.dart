@@ -15,6 +15,7 @@ class AppTheme {
           elevation: 0,
           centerTitle: true,
           titleTextStyle: TextStyle(
+            fontFamily: 'Inter',
             color: AppColors.texto,
             fontSize: 20,
             fontWeight: FontWeight.bold,
