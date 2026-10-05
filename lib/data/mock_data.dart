@@ -166,10 +166,10 @@ final List<TimeTabela> classificacaoMock = [
 
 // Função porque o palpite é editável: cada tela recebe uma lista nova
 List<Palpite> criarPalpitesMock() => [
-      Palpite(timeCasa: 'Corinthians', timeFora: 'Palmeiras', data: 'Sáb, 16:00'),
-      Palpite(timeCasa: 'Vasco', timeFora: 'Botafogo', data: 'Sáb, 18:30'),
-      Palpite(timeCasa: 'Santos', timeFora: 'São Paulo', data: 'Dom, 16:00'),
-      Palpite(timeCasa: 'Fortaleza', timeFora: 'Ceará', data: 'Dom, 18:30'),
+      Palpite(id: 'p1', timeCasa: 'Corinthians', timeFora: 'Palmeiras', data: 'Sáb, 16:00'),
+      Palpite(id: 'p2', timeCasa: 'Vasco', timeFora: 'Botafogo', data: 'Sáb, 18:30'),
+      Palpite(id: 'p3', timeCasa: 'Santos', timeFora: 'São Paulo', data: 'Dom, 16:00'),
+      Palpite(id: 'p4', timeCasa: 'Fortaleza', timeFora: 'Ceará', data: 'Dom, 18:30'),
     ];
 
 // Atalhos pra deixar os mocks legíveis

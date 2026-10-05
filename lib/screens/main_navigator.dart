@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../repositories/brasileirao_repository.dart';
 import '../theme/app_colors.dart';
 import 'bolao_screen.dart';
 import 'jogos_screen.dart';
 import 'tabela_screen.dart';
 
 class MainNavigator extends StatefulWidget {
-  const MainNavigator({super.key});
+  final BrasileiraoRepository repositorio;
+
+  const MainNavigator({super.key, required this.repositorio});
 
   @override
   State<MainNavigator> createState() => _MainNavigatorState();
@@ -15,14 +18,17 @@ class MainNavigator extends StatefulWidget {
 class _MainNavigatorState extends State<MainNavigator> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = const [
-    JogosScreen(),
-    TabelaScreen(),
-    BolaoScreen(),
+  // IndexedStack mantém as abas vivas (não perde palpite ao trocar de aba)
+  late final List<Widget> _screens = [
+    JogosScreen(repositorio: widget.repositorio),
+    TabelaScreen(repositorio: widget.repositorio),
+    BolaoScreen(repositorio: widget.repositorio),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final online = widget.repositorio.online;
+
     return Scaffold(
       appBar: AppBar(
         title: const Row(
@@ -41,8 +47,20 @@ class _MainNavigatorState extends State<MainNavigator> {
             ),
           ],
         ),
+        actions: [
+          Tooltip(
+            message: online ? 'Conectado ao Firebase' : 'Usando dados de exemplo',
+            child: Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: Icon(
+                online ? Icons.cloud_done : Icons.cloud_off,
+                color: online ? AppColors.primaria : AppColors.textoApagado,
+              ),
+            ),
+          ),
+        ],
       ),
-      body: _screens[_currentIndex],
+      body: IndexedStack(index: _currentIndex, children: _screens),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: AppColors.card,
         selectedItemColor: AppColors.primaria,

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "986800546551",
+    "project_id": "brasileirao-na-mao",
+    "storage_bucket": "brasileirao-na-mao.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986800546551:android:1e7919c33d53f0f5a7e9f2",
+        "android_client_info": {
+          "package_name": "br.com.brasileiraonamao"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFn_odSBbJBGD9nNrPZ4_bxhh6Mm_UUJI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

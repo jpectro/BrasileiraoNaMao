@@ -1,0 +1,18 @@
+rules_version = '2';
+
+// Regras do Firestore — copiar pro console (Firestore > Regras).
+// Sem login no app ainda, então: todo mundo lê; partidas e tabela só podem ser
+// criadas (carga inicial), e os palpites podem ser editados.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /partidas/{id} {
+      allow read, create: if true;
+    }
+    match /classificacao/{id} {
+      allow read, create: if true;
+    }
+    match /palpites/{id} {
+      allow read, write: if true;
+    }
+  }
+}

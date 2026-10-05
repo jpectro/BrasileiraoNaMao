@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
+import 'repositories/brasileirao_repository.dart';
+import 'repositories/mock_repository.dart';
 import 'screens/main_navigator.dart';
 import 'theme/app_theme.dart';
 
-void main() {
-  runApp(const BrasileiraoApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final repositorio = await BrasileiraoRepository.iniciar();
+  runApp(BrasileiraoApp(repositorio: repositorio));
 }
 
 class BrasileiraoApp extends StatelessWidget {
-  const BrasileiraoApp({super.key});
+  final BrasileiraoRepository? repositorio;
+
+  const BrasileiraoApp({super.key, this.repositorio});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +22,7 @@ class BrasileiraoApp extends StatelessWidget {
       title: 'Brasileirão Na Mão',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.escuro,
-      home: const MainNavigator(),
+      home: MainNavigator(repositorio: repositorio ?? MockRepository()),
     );
   }
 }

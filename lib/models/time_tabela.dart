@@ -12,4 +12,20 @@ class TimeTabela {
     required this.vitorias,
     required this.saldo,
   });
+
+  factory TimeTabela.fromMap(Map<String, dynamic> m) => TimeTabela(
+        nome: m['nome'],
+        pontos: (m['pontos'] as num).toInt(),
+        jogos: (m['jogos'] as num).toInt(),
+        vitorias: (m['vitorias'] as num).toInt(),
+        saldo: (m['saldo'] as num).toInt(),
+      );
+
+  Map<String, dynamic> toMap() => {
+        'nome': nome,
+        'pontos': pontos,
+        'jogos': jogos,
+        'vitorias': vitorias,
+        'saldo': saldo,
+      };
 }

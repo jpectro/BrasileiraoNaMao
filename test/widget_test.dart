@@ -3,10 +3,13 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:brasileirao_na_mao/data/mock_data.dart';
 import 'package:brasileirao_na_mao/main.dart';
+import 'package:brasileirao_na_mao/models/jogo.dart';
+import 'package:brasileirao_na_mao/models/time_tabela.dart';
 
 void main() {
   testWidgets('navega entre as abas principais', (WidgetTester tester) async {
     await tester.pumpWidget(const BrasileiraoApp());
+    await tester.pumpAndSettle();
 
     expect(find.text('Jogos de Hoje'), findsOneWidget);
     expect(find.text('Flamengo'), findsOneWidget);
@@ -26,6 +29,7 @@ void main() {
 
   testWidgets('abre o detalhe da partida com lances e estatísticas', (WidgetTester tester) async {
     await tester.pumpWidget(const BrasileiraoApp());
+    await tester.pumpAndSettle();
 
     await tester.tap(find.text('Flamengo'));
     await tester.pumpAndSettle();
@@ -45,6 +49,7 @@ void main() {
 
   testWidgets('filtra jogos por status', (WidgetTester tester) async {
     await tester.pumpWidget(const BrasileiraoApp());
+    await tester.pumpAndSettle();
 
     await tester.tap(find.text('Próximos'));
     await tester.pumpAndSettle();
@@ -61,5 +66,21 @@ void main() {
     final grenal = jogosMock.firstWhere((j) => j.timeCasa == 'Grêmio');
     expect(grenal.golsCasa, 1);
     expect(grenal.golsFora, 1);
+  });
+
+  test('jogo sobrevive à ida e volta pro formato do Firestore', () {
+    for (final original in jogosMock) {
+      final copia = Jogo.fromMap(original.toMap());
+      expect(copia.timeCasa, original.timeCasa);
+      expect(copia.status, original.status);
+      expect(copia.golsCasa, original.golsCasa);
+      expect(copia.golsFora, original.golsFora);
+      expect(copia.eventos.length, original.eventos.length);
+      expect(copia.todasEstatisticas.length, original.todasEstatisticas.length);
+    }
+
+    final time = TimeTabela.fromMap(classificacaoMock.first.toMap());
+    expect(time.nome, 'Palmeiras');
+    expect(time.pontos, 62);
   });
 }

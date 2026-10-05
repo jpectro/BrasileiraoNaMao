@@ -26,6 +26,34 @@ class Jogo {
     this.estatisticas = const [],
   });
 
+  factory Jogo.fromMap(Map<String, dynamic> m) => Jogo(
+        rodada: (m['rodada'] as num).toInt(),
+        timeCasa: m['timeCasa'],
+        timeFora: m['timeFora'],
+        status: StatusJogo.values.byName(m['status']),
+        minuto: (m['minuto'] as num?)?.toInt(),
+        horario: m['horario'],
+        estadio: m['estadio'],
+        eventos: [
+          for (final e in m['eventos'] ?? []) EventoPartida.fromMap(Map<String, dynamic>.from(e)),
+        ],
+        estatisticas: [
+          for (final e in m['estatisticas'] ?? []) Estatistica.fromMap(Map<String, dynamic>.from(e)),
+        ],
+      );
+
+  Map<String, dynamic> toMap() => {
+        'rodada': rodada,
+        'timeCasa': timeCasa,
+        'timeFora': timeFora,
+        'status': status.name,
+        'minuto': minuto,
+        'horario': horario,
+        'estadio': estadio,
+        'eventos': eventos.map((e) => e.toMap()).toList(),
+        'estatisticas': estatisticas.map((e) => e.toMap()).toList(),
+      };
+
   // placar sai dos eventos, assim nunca fica inconsistente
   int get golsCasa => eventos.where((e) => e.ehGol && e.contaParaMandante).length;
   int get golsFora => eventos.where((e) => e.ehGol && !e.contaParaMandante).length;

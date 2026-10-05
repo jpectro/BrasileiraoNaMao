@@ -1,17 +1,44 @@
 import 'package:flutter/material.dart';
 
-import '../data/mock_data.dart';
+import '../models/time_tabela.dart';
+import '../repositories/brasileirao_repository.dart';
 import '../theme/app_colors.dart';
+import '../widgets/estado_vazio.dart';
 import '../widgets/linha_tabela.dart';
 import '../widgets/titulo_secao.dart';
 
-class TabelaScreen extends StatelessWidget {
-  const TabelaScreen({super.key});
+class TabelaScreen extends StatefulWidget {
+  final BrasileiraoRepository repositorio;
+
+  const TabelaScreen({super.key, required this.repositorio});
+
+  @override
+  State<TabelaScreen> createState() => _TabelaScreenState();
+}
+
+class _TabelaScreenState extends State<TabelaScreen> {
+  late final Stream<List<TimeTabela>> _classificacao = widget.repositorio.classificacao();
 
   @override
   Widget build(BuildContext context) {
-    final classificacao = classificacaoMock;
+    return StreamBuilder<List<TimeTabela>>(
+      stream: _classificacao,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return const EstadoVazio(
+            icone: Icons.wifi_off,
+            mensagem: 'Não foi possível carregar a tabela',
+          );
+        }
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        return _conteudo(snapshot.data!);
+      },
+    );
+  }
 
+  Widget _conteudo(List<TimeTabela> classificacao) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(

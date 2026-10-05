@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../data/mock_data.dart';
 import '../models/jogo.dart';
+import '../repositories/brasileirao_repository.dart';
 import '../theme/app_colors.dart';
 import '../widgets/estado_vazio.dart';
 import '../widgets/match_card.dart';
@@ -26,7 +26,9 @@ enum _Filtro {
 }
 
 class JogosScreen extends StatefulWidget {
-  const JogosScreen({super.key});
+  final BrasileiraoRepository repositorio;
+
+  const JogosScreen({super.key, required this.repositorio});
 
   @override
   State<JogosScreen> createState() => _JogosScreenState();
@@ -34,6 +36,7 @@ class JogosScreen extends StatefulWidget {
 
 class _JogosScreenState extends State<JogosScreen> {
   _Filtro _filtro = _Filtro.todos;
+  late final Stream<List<Jogo>> _jogos = widget.repositorio.jogos();
 
   void _abrirPartida(Jogo jogo) {
     Navigator.of(context).push(
@@ -43,7 +46,25 @@ class _JogosScreenState extends State<JogosScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final jogos = jogosMock.where(_filtro.aceita).toList();
+    return StreamBuilder<List<Jogo>>(
+      stream: _jogos,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return const EstadoVazio(
+            icone: Icons.wifi_off,
+            mensagem: 'Não foi possível carregar os jogos',
+          );
+        }
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        return _conteudo(snapshot.data!);
+      },
+    );
+  }
+
+  Widget _conteudo(List<Jogo> todos) {
+    final jogos = todos.where(_filtro.aceita).toList();
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -52,10 +73,11 @@ class _JogosScreenState extends State<JogosScreen> {
         children: [
           const TituloSecao('Jogos de Hoje'),
           const SizedBox(height: 4),
-          Text(
-            'Brasileirão Série A · Rodada ${jogosMock.first.rodada}',
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
+          if (todos.isNotEmpty)
+            Text(
+              'Brasileirão Série A · Rodada ${todos.first.rodada}',
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
           const SizedBox(height: 12),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,

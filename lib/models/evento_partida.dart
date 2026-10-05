@@ -15,6 +15,22 @@ class EventoPartida {
     this.detalhe,
   });
 
+  factory EventoPartida.fromMap(Map<String, dynamic> m) => EventoPartida(
+        minuto: (m['minuto'] as num).toInt(),
+        tipo: TipoEvento.values.byName(m['tipo']),
+        jogador: m['jogador'],
+        doMandante: m['doMandante'],
+        detalhe: m['detalhe'],
+      );
+
+  Map<String, dynamic> toMap() => {
+        'minuto': minuto,
+        'tipo': tipo.name,
+        'jogador': jogador,
+        'doMandante': doMandante,
+        'detalhe': detalhe,
+      };
+
   bool get ehGol =>
       tipo == TipoEvento.gol || tipo == TipoEvento.golPenalti || tipo == TipoEvento.golContra;
 

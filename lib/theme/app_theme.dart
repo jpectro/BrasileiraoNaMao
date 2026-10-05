@@ -21,6 +21,11 @@ class AppTheme {
             fontWeight: FontWeight.bold,
           ),
         ),
+        snackBarTheme: const SnackBarThemeData(
+          backgroundColor: AppColors.card,
+          contentTextStyle: TextStyle(fontFamily: 'Inter', color: AppColors.texto),
+          behavior: SnackBarBehavior.floating,
+        ),
         colorScheme: const ColorScheme.dark(
           primary: AppColors.primaria,
           surface: AppColors.card,
