@@ -8,7 +8,7 @@ class AppColors {
   static const card = Color(0xFF1E1E1E);
   static const primaria = Color(0xFF00E676);
   static const texto = Colors.white;
-  static const textoSecundario = Color(0xFFB0B0B0);
+  static const textoSecundario = Color(0xFFA0A0A0);
   static const textoApagado = Colors.white54;
   static const divisor = Colors.white24;
   static const perigo = Colors.redAccent;
