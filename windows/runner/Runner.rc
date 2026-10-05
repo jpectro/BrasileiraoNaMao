@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "fut_stats" "\0"
+            VALUE "FileDescription", "Brasileirao Na Mao" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "fut_stats" "\0"
+            VALUE "InternalName", "brasileirao_na_mao" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "fut_stats.exe" "\0"
-            VALUE "ProductName", "fut_stats" "\0"
+            VALUE "OriginalFilename", "brasileirao_na_mao.exe" "\0"
+            VALUE "ProductName", "Brasileirao Na Mao" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

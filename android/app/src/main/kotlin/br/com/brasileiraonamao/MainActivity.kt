@@ -1,4 +1,4 @@
-package com.example.fut_stats
+package br.com.brasileiraonamao
 
 import io.flutter.embedding.android.FlutterActivity
 

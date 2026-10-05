@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="fut_stats"
+        android:label="Brasileirão Na Mão"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

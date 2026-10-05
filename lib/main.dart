@@ -13,6 +13,7 @@ class BrasileiraoApp extends StatelessWidget {
       title: 'Brasileirão Na Mão',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'Inter',
         brightness: Brightness.dark,
         scaffoldBackgroundColor: const Color(0xFF121212),
         primaryColor: const Color(0xFF00E676),
@@ -24,7 +25,6 @@ class BrasileiraoApp extends StatelessWidget {
             color: Colors.white,
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            fontFamily: 'Inter',
           ),
         ),
         colorScheme: const ColorScheme.dark(
@@ -32,8 +32,8 @@ class BrasileiraoApp extends StatelessWidget {
           surface: Color(0xFF1E1E1E),
         ),
         textTheme: const TextTheme(
-          bodyMedium: TextStyle(color: Colors.white, fontFamily: 'Inter'),
-          bodySmall: TextStyle(color: Color(0xFFB0B0B0), fontFamily: 'Inter'),
+          bodyMedium: TextStyle(color: Colors.white),
+          bodySmall: TextStyle(color: Color(0xFFB0B0B0)),
         ),
       ),
       home: const MainNavigator(),
